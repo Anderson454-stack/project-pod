@@ -2,7 +2,8 @@
 # building_location_manager.py
 # E-gle Eye 시스템 - Building Location Excel Manager
 # 원준님 요청: buildings2.xlsx (8대 카메라) 기본 사용
-# 생성일: 2026-03-03
+# [변경됨 ★★★★★] 2026-03-04 factory_data (인천 북항 스마트 물류센터 8대) 적용
+# 생성일: 2026-03-04
 # =====================================================
 
 import pandas as pd
@@ -36,22 +37,40 @@ class BuildingLocationManager:
         else:
             print(f"🆕 새 파일 생성: {self.excel_path}")
             df = pd.DataFrame(columns=DEFAULT_COLUMNS)
-            # 예제 데이터 (필요 시 사용)
-            example_data = {
-                "Camera_ID": ["camera_01", "camera_02", "camera_03"],
-                "Building_Name": ["강남스퀘어", "코엑스", "롯데월드타워"],
-                "Floor": [5, 12, 45],
-                "Zone": ["A구역", "B구역", "전망대"],
-                "GPS_Lat": [37.4979, 37.5112, 37.5665],
-                "GPS_Lon": [127.0276, 127.0596, 126.9780],
-                "Fire_Dept_Phone": ["02-123-4567", "02-987-6543", "02-555-1212"],
-                "Fire_Dept_Email": ["gangnam@fire.go.kr", "coex@fire.go.kr", "lotte@fire.go.kr"],
-                "Fire_Dept_Address": ["서울 강남구 테헤란로 123", "서울 강남구 영동대로 513", "서울 송파구 올림픽로 300"],
-                "Device_IP": ["192.168.1.101", "192.168.1.102", "192.168.1.103"],
-                "Threshold_Override": [75, 80, 70],
-                "Last_Event_Time": [None, None, None]
+            
+            # [변경됨 ★★★★★] 원준님 제공 factory_data 완전 적용
+            # 이전: example_data (3개 카메라) → 삭제
+            # 추가: 인천 북항 스마트 물류센터 8대 카메라 factory_data
+            factory_data = {
+                "Camera_ID": [
+                    "camera_01", "camera_02", "camera_03", "camera_04",
+                    "camera_05", "camera_06", "camera_07", "camera_08"
+                ],
+                "Building_Name": ["인천 북항 스마트 물류센터"] * 8,
+                "Floor": [1, 1, 2, 2, 1, 3, 1, 1],
+                "Zone": [
+                    "입고 게이트 A", "입고 게이트 B", "생산라인 1층", "생산라인 2층",
+                    "출고 적재장", "사무동 3층", "야외 보안 주차장", "중앙 보안센터"
+                ],
+                "GPS_Lat": [
+                    37.4782, 37.4785, 37.4791, 37.4793,
+                    37.4778, 37.4802, 37.4765, 37.4789
+                ],
+                "GPS_Lon": [
+                    126.6321, 126.6324, 126.6318, 126.6320,
+                    126.6335, 126.6312, 126.6341, 126.6327
+                ],
+                "Fire_Dept_Phone": ["032-123-4567"] * 8,
+                "Fire_Dept_Email": ["northport@fire.go.kr"] * 8,
+                "Fire_Dept_Address": ["인천광역시 중구 북항로 123"] * 8,
+                "Device_IP": [
+                    "192.168.10.101", "192.168.10.102", "192.168.10.103", "192.168.10.104",
+                    "192.168.10.105", "192.168.10.106", "192.168.10.107", "192.168.10.108"
+                ],
+                "Threshold_Override": [72, 75, 68, 80, 65, 78, 70, 85],
+                "Last_Event_Time": [None] * 8
             }
-            df = pd.DataFrame(example_data)
+            df = pd.DataFrame(factory_data)
             self._save_excel(df)
         return df
 
