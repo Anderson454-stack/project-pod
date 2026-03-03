@@ -1,0 +1,8 @@
+{
+  "camera_id": "camera_06",
+  "rtsp_url": "rtsp://admin:1234@192.168.0.10:554/stream1",
+  "status": "Green",
+  "last_event": null,
+  "last_event_time": null,
+  "last_updated": "2026-03-03T12:14:12.258403"
+}
